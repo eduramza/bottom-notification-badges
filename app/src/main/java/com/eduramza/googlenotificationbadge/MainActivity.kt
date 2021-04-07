@@ -1,8 +1,10 @@
 package com.eduramza.googlenotificationbadge
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.badge.BadgeDrawable
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,6 +16,24 @@ class MainActivity : AppCompatActivity() {
         addBadge()
         BottomMenuHelper.showBadge(this, bottom_nav_view, R.id.action_photo, "5")
 
+        bottom_nav_view.setOnNavigationItemSelectedListener { item ->
+            when(item.itemId){
+                R.id.action_home -> {
+                    removeBagdeIfVisible(R.id.action_home)
+                    true
+                }
+                R.id.action_photo -> {
+                    removeBagdeIfVisible(R.id.action_photo)
+                    true
+                }
+                R.id.action_perfil -> {
+                    removeBagdeIfVisible(R.id.action_perfil)
+                    true
+                }
+                else -> false
+            }
+        }
+
     }
 
     private fun addBadge(){
@@ -24,8 +44,16 @@ class MainActivity : AppCompatActivity() {
         badge.isVisible = true
     }
 
-    private fun removeBadge(){
-        bottom_nav_view.removeBadge(R.id.tv_bottom_nav_badge)
+    private fun removeBadge(menuItem: Int){
+        bottom_nav_view.removeBadge(menuItem)
+    }
+
+    private fun removeBagdeIfVisible(menuItem: Int) {
+        val badgeDrawable = bottom_nav_view.getBadge(menuItem)
+        if (badgeDrawable != null) {
+            badgeDrawable.isVisible = false
+            badgeDrawable.clearNumber()
+        }
     }
 
 }
