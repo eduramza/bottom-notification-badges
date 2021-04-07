@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             badgeDrawable.isVisible = false
             badgeDrawable.clearNumber()
         }
+        BottomMenuHelper.removeBadge(bottom_nav_view, menuItem)
     }
 
 }

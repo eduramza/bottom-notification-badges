@@ -12,6 +12,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 class BottomMenuHelper {
 
     companion object{
+
+        private val menuMap = mapOf(
+            R.id.action_home to 1,
+            R.id.action_photo to 2,
+            R.id.action_perfil to 3)
+
         fun showBadge(
             context: Context,
             bottomNavigationView: BottomNavigationView,
@@ -27,12 +33,12 @@ class BottomMenuHelper {
             itemView.addView(badge)
         }
 
-        private fun removeBadge(
+        fun removeBadge(
             bottomNavigationView: BottomNavigationView,
             @IdRes itemId: Int) {
             val itemView: BottomNavigationItemView = bottomNavigationView.findViewById(itemId)
             if (itemView.childCount == 3) {
-                itemView.removeViewAt(2)
+                itemView.removeViewAt(menuMap.getValue(itemId))
             }
         }
     }
