@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         bottom_nav_view.setOnNavigationItemSelectedListener { item ->
             when(item.itemId){
                 R.id.action_home -> {
-                    removeBagdeIfVisible(R.id.action_home)
+                    removeBadge(R.id.action_home)
                     true
                 }
                 R.id.action_photo -> {
@@ -45,7 +45,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun removeBadge(menuItem: Int){
-        bottom_nav_view.removeBadge(menuItem)
+        val badgeDrawable = bottom_nav_view.getBadge(menuItem)
+        if (badgeDrawable != null) {
+            badgeDrawable.isVisible = false
+            badgeDrawable.clearNumber()
+        }
     }
 
     private fun removeBagdeIfVisible(menuItem: Int) {
